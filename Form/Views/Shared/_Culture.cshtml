@@ -1,0 +1,17 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = new SelectList(Enum.GetValues(typeof(Language)));
+}
+@using Form.Enums;
+@using Form.Resources
+<div>
+    <form asp-action="SetLanguage" asp-controller="Home" method="post">
+        <select name="Language" onchange="this.form.submit();">
+            <option value=@Language.Default>@Resource.DefaultLanguage</option>
+            <option value=@Language.Czech>@Resource.CzechLanguage</option>
+            <option value=@Language.English>@Resource.EnglishLanguage</option>
+        </select>
+    </form>
+</div>

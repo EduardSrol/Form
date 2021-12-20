@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Form";
+}
+@model Form.Models.FormModel;
+@using Form.Enums;
+@using Form.Resources
+
+<div class="container body-content">
+    <h1 class="display-4">@Resource.Form</h1>
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.Label("FirstName", @Resource.FirstName, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new {@required = true, @class = "form-control" } })
+                </div>
+                @Html.Label("LastName", @Resource.LastName, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new {@required = true, @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("DoNotHaveIDNumber", @Resource.DoNotHaveIDNumber, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DoNotHaveIDNumber, new { htmlAttributes = new {@id="have-id-number", @onclick="disableIDBox(this)"} })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("IDNumber", @Resource.IDNumber, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new {@required = true, @id="id-number", @onchange="getDob(this.value)", @class = "form-control"} })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("BirthDate", @Resource.BirthDate, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new {@required = true, @id="birth-date", @class = "form-control"} })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sex", @Resource.Sex, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="single-element-widget">
+                        <div class="default-select">
+                            <select name="Nationality">
+                                <option value=@Sex.Female>@Resource.Female</option>
+                                <option value=@Sex.Male>@Resource.Male</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Email", @Resource.Email, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new {@required = true, @class = "form-control"} })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Nationality", @Resource.Nationality, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="single-element-widget">
+                        <div class="default-select">
+                            <select name="Nationality">
+                                <option value=@Nationality.Czech>@Resource.CzechNat</option>
+                                <option value=@Nationality.Slovak>@Resource.SlovakNat</option>
+                                <option value=@Nationality.English>@Resource.EnglishNat</option>
+                                <option value=@Nationality.German>@Resource.GermanNat</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("GDPR", @Resource.GDPR, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GDPR, new { htmlAttributes = new {@required = true} })
+                </div>
+            </div>
+            <a class="small" style="cursor: pointer" onclick="getClientReport()">@Resource.GDPRConsent</a>
+            <hr />
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@Resource.Submit" class="boxed-btn"/>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script src=~/js/site.js></script>
